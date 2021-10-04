@@ -1,0 +1,27 @@
+---
+title: "Thomas Wilder"
+#image: "tobi.jpg"
+links:
+  - label: LinkedIn
+    url: "https://linkedin.com/in/thomasmwilder/"
+#  - label: Twitter
+#    url: "https://twitter.com/"
+  - label: GitHub
+    url: "https://github.com/tomwilder"
+  - label: Email
+    url: "mailto:t.wilder@uea.ac.uk"
+output:
+  postcards::jolla
+---
+ 
+<!-- I am a classically trained data scientist living in the San Francisco Bay Area.  -->
+<!-- Currently I work on the Oculus team at Facebook. I love talking about baseball,  -->
+<!-- true crime podcasts, and causal inference. -->
+
+## Bio
+
+
+## Education
+
+
+## Experience
