@@ -1,6 +1,6 @@
 ---
 title: "Thomas Wilder"
-#image: "tobi.jpg"
+image: "tom.jpg"
 links:
   - label: LinkedIn
     url: "https://linkedin.com/in/thomasmwilder/"
@@ -11,7 +11,7 @@ links:
   - label: Email
     url: "mailto:t.wilder@uea.ac.uk"
 output:
-  postcards::jolla
+  postcards::trestles
 ---
  
 <!-- I am a classically trained data scientist living in the San Francisco Bay Area.  -->
@@ -20,8 +20,28 @@ output:
 
 ## Bio
 
+I am a current PhD student at the University of East Anglia who is interested in how surface winds interact with small scale ocean processes. When I am away from the office you can find me cycling over the hills of Norfolk, or running through a muddy field.
+
 
 ## Education
 
+**University of East Anglia** | Norwich, UK 
+
+PhD | 2018 - Present
+
+Supervisors - Dr. Xiaoming Zhai, Dr. Dave Munday, Prof. Manoj Joshi
+
+Thesis - "Mesoscale eddy-wind interaction"
+
+**The University of Manchester** | Manchester, UK
+
+MSc | 2016-2017
+
+Dissertation - "Boundary layer separation in a non-axisymmetric container"
+
 
 ## Experience
+
+**Research Cruise** | North Atlantic, 24N
+
+Physics team member | 2020
