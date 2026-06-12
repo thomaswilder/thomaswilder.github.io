@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thomas Wilder — Ocean Scientist</title>
+  <meta name="description" content="Thomas Wilder is a research scientist working on ocean mixing, eddy parameterisations, and machine learning in oceanography.">
+  <meta property="og:title" content="Thomas Wilder — Ocean Scientist">
+  <meta property="og:description" content="Research scientist working on ocean mixing, eddy parameterisations, and machine learning in oceanography.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="me.jpg">
+  <link rel="icon" href="favicon/site.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream:       #f5f0e8;
+      --cream-dark:  #ede7d9;
+      --warm-white:  #faf7f2;
+      --sand:        #d6cdb8;
+      --sand-dark:   #b8ad97;
+      --charcoal:    #2c2a26;
+      --ink:         #3d3a34;
+      --muted:       #7a7568;
+      --accent:      #5c6b5a;      /* muted sage green */
+      --accent-light:#8fa68c;
+      --rule:        #cec7b4;
+      --sidebar-w:   260px;
+      --serif: 'EB Garamond', Georgia, serif;
+      --sans:  'DM Sans', system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: 17px; scroll-behavior: smooth; }
+
+    body {
+      background: var(--warm-white);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.7;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ── Sidebar ───────────────────────────────────────────── */
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      width: var(--sidebar-w);
+      height: 100vh;
+      background: var(--cream);
+      border-right: 1px solid var(--rule);
+      display: flex;
+      flex-direction: column;
+      padding: 2.8rem 2rem 2rem;
+      overflow-y: auto;
+    }
+
+    .sidebar-name {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 500;
+      color: var(--charcoal);
+      letter-spacing: 0.01em;
+      line-height: 1.3;
+      margin-bottom: 0.25rem;
+    }
+
+    .sidebar-role {
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
+    .sidebar-photo {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: var(--sand);
+      margin-bottom: 2rem;
+      overflow: hidden;
+      border: 2px solid var(--cream-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.7rem;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    nav { flex: 1; }
+
+    nav a {
+      display: block;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    nav a:hover, nav a.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent-light);
+    }
+
+    nav a.active {
+      font-weight: 500;
+      color: var(--charcoal);
+    }
+
+    .sidebar-links {
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--rule);
+    }
+
+    .sidebar-links a {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 0.3rem 0;
+      transition: color 0.2s;
+    }
+
+    .sidebar-links a:hover { color: var(--accent); }
+
+    .sidebar-links .link-icon {
+      display: inline-block;
+      width: 14px;
+      margin-right: 0.4rem;
+      opacity: 0.6;
+    }
+
+    .link-icon img {
+      width: 15px;
+      height: 15px;
+      filter: saturate(0) opacity(0.55);
+    }
+
+    /* ── Main content ──────────────────────────────────────── */
+    .main {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      padding: 4rem 4.5rem 6rem 4rem;
+      max-width: 820px;
+    }
+
+    /* ── Section ───────────────────────────────────────────── */
+    .section {
+      display: none;
+    }
+    .section.active {
+      display: block;
+      animation: fadeIn 0.25s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Typography ────────────────────────────────────────── */
+    h1 {
+      font-family: var(--serif);
+      font-size: 2.4rem;
+      font-weight: 400;
+      color: var(--charcoal);
+      line-height: 1.2;
+      margin-bottom: 0.4rem;
+      letter-spacing: -0.01em;
+    }
+
+    .section-subtitle {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+    }
+
+    h2 {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--charcoal);
+      margin: 2.5rem 0 1rem;
+    }
+
+    p { margin-bottom: 1.1rem; color: var(--ink); }
+
+    a { color: #1e7a2e; text-decoration: underline; }
+    a:hover { color: #155a21; }
+
+    .rule {
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin: 2.5rem 0;
+    }
+
+    /* ── About section ─────────────────────────────────────── */
+    .about-lead {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      line-height: 1.65;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .tag {
+      background: var(--cream-dark);
+      color: var(--charcoal);
+      font-size: 0.74rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      padding: 0.3rem 0.75rem;
+      border-radius: 2px;
+    }
+
+    .affiliation-block {
+      background: var(--cream);
+      border-left: 2px solid var(--accent-light);
+      padding: 1rem 1.25rem;
+      margin: 2rem 0;
+      font-size: 0.88rem;
+      color: var(--ink);
+    }
+
+    .affiliation-block strong {
+      display: block;
+      font-weight: 500;
+      color: var(--charcoal);
+      margin-bottom: 0.2rem;
+    }
+
+    /* ── Publications ──────────────────────────────────────── */
+    .pub-year-group { margin-bottom: 2.5rem; }
+
+    .pub-year {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .pub-item {
+      display: grid;
+      grid-template-columns: 3px 1fr;
+      gap: 0 1.25rem;
+      margin-bottom: 1.5rem;
+      padding-left: 0;
+    }
+
+    .pub-rule {
+      background: var(--sand);
+      border-radius: 2px;
+      margin-top: 4px;
+    }
+
+    .pub-content {}
+
+    .pub-title {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      color: var(--charcoal);
+      font-weight: 500;
+      line-height: 1.4;
+      margin-bottom: 0.2rem;
+    }
+
+    .pub-title a {
+      color: var(--charcoal);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .pub-title a:hover { color: var(--accent); text-decoration: none; }
+
+    .pub-authors {
+      font-size: 0.83rem;
+      color: var(--muted);
+      margin-bottom: 0.15rem;
+    }
+
+    .pub-authors em { font-style: normal; color: var(--ink); font-weight: 400; }
+
+    .pub-journal {
+      font-size: 0.83rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .pub-links {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 0.4rem;
+    }
+
+    .pub-link {
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--accent);
+      text-decoration: none;
+      padding: 0.15rem 0.5rem;
+      border: 1px solid var(--accent-light);
+      border-radius: 2px;
+      transition: background 0.15s, color 0.15s;
+    }
+    .pub-link:hover {
+      background: var(--accent);
+      color: var(--warm-white);
+      text-decoration: none;
+    }
+
+    /* ── CV section ────────────────────────────────────────── */
+    .cv-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--charcoal);
+      color: var(--warm-white);
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.75rem 1.5rem;
+      border-radius: 2px;
+      text-decoration: none;
+      margin-bottom: 2.5rem;
+      transition: background 0.2s;
+    }
+    .cv-download:hover { background: var(--accent); text-decoration: none; }
+
+    .cv-section-head {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 2rem 0 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .cv-entry {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 0 1.5rem;
+      margin-bottom: 1.2rem;
+      font-size: 0.9rem;
+    }
+
+    .cv-dates {
+      color: var(--muted);
+      font-size: 0.8rem;
+      padding-top: 0.1rem;
+      line-height: 1.5;
+    }
+
+    .cv-body {}
+
+    .cv-role {
+      font-weight: 500;
+      color: var(--charcoal);
+      line-height: 1.4;
+    }
+
+    .cv-inst {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .cv-desc {
+      color: var(--ink);
+      font-size: 0.85rem;
+      margin-top: 0.2rem;
+    }
+
+    /* ── Responsive ────────────────────────────────────────── */
+    @media (max-width: 780px) {
+      :root { --sidebar-w: 0px; }
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--rule);
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 1.5rem;
+        gap: 1rem;
+      }
+      .sidebar-photo { width: 64px; height: 64px; margin-bottom: 0; }
+      body { flex-direction: column; }
+      .main { margin-left: 0; padding: 2rem 1.5rem 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Sidebar ────────────────────────────────────────────── -->
+<aside class="sidebar">
+  <div class="sidebar-photo">
+    <img src="me.jpg" alt="Thomas Wilder" width="80">
+  </div>
+  <div class="sidebar-name">Thomas Wilder</div>
+  <div class="sidebar-role">Research Scientist</div>
+
+  <nav>
+    <a href="#about"        class="nav-link active" data-section="about">About</a>
+    <a href="#publications" class="nav-link"        data-section="publications">Publications</a>
+    <a href="#cv"           class="nav-link"        data-section="cv">CV</a>
+  </nav>
+
+  <div class="sidebar-links">
+    <a href="mailto:tmwilder@outlook.com">
+      <span class="link-icon">
+        <img src="favicon/email.svg" alt="Email">
+      </span>tmwilder@outlook.com
+    </a>
+    <a href="https://orcid.org/0000-0002-1108-4655" target="_blank" rel="noopener">
+      <span class="link-icon">
+        <img src="favicon/orcid.svg" alt="ORCID">
+      </span>ORCID
+    </a>
+    <a href="https://scholar.google.com/citations?user=jGA0I0oAAAAJ&hl=en&authuser=1" target="_blank" rel="noopener">
+      <span class="link-icon">
+        <img src="favicon/googlescholar.svg" alt="Google Scholar">
+      </span>Google Scholar
+    </a>
+    <a href="https://github.com/thomaswilder" target="_blank" rel="noopener">
+      <span class="link-icon">
+        <img src="favicon/github.svg" alt="GitHub">
+      </span>GitHub
+    </a>
+    <a href="https://www.linkedin.com/in/thomasmwilder/" target="_blank" rel="noopener">
+      <span class="link-icon">
+        <img src="favicon/linkedin.svg" alt="LinkedIn">
+      </span>LinkedIn
+    </a>
+  </div>
+</aside>
+
+<!-- ── Main ───────────────────────────────────────────────── -->
+<main class="main">
+
+  <!-- About ───────────────────────────────────────────────── -->
+  <section id="about" class="section active">
+    <h1>Thomas Wilder</h1>
+    <div class="section-subtitle">Machine Learning &amp; Ocean Modelling</div>
+
+    <p class="about-lead">
+      I am a research scientist at the University of Reading within the <a href="https://ncas.ac.uk/">National Centre for Atmospheric Science</a> interested in machine learning and climate modelling. In my current role within the EU Horizon project (<a href="https://ai4pex.org/">AI4PEX</a>), I am applying various machine learning techniques to improve current mesoscale eddy closures, with the aim of producing more realistic ocean dynamics.
+    </p>
+
+    <p>
+      My primary research focuses on the development of mesoscale eddy parameterisations. In this area I have explored how the role of different viscosity closures, such as 2D and QG Leith, can modulate the ocean circulation (<a href="paper/WilderKuhlbrodt-2025.pdf">see this paper</a>). I am currently working on a machine learning closure for the GEOMETRIC eddy parameterisation at the eddy-permitting resolution (<a href="https://github.com/thomaswilder/ml_model_ai4pex">see ML code here</a>) by applying a U-Net model. Much of this work directly feeds into the enhancement of the NEMO ocean model, and for future versions of the UK Earth System Model (UKESM).
+    </p>
+
+    <p>
+      Beyond the parameterisation world, I am keen to explore the future development and application of climate emulators. 
+    </p>
+
+    <div class="tags">
+      <span class="tag">Ocean modelling</span>
+      <span class="tag">Eddy parameterisations</span>
+      <span class="tag">Hybrid modelling</span>
+      <span class="tag">Machine learning</span>
+      <span class="tag">NEMO</span>
+    </div>
+
+    <div class="affiliation-block">
+      <strong>Current position</strong>
+      Research Scientist, Department of Meteorology<br>
+      National Centre for Atmospheric Science<br>
+      University of Reading, United Kingdom
+    </div>
+
+    <!--<hr class="rule">
+
+    <h2>Recent work</h2>
+    <p>
+      Recent projects...
+    </p>-->
+  </section>
+
+  <!-- Publications ─────────────────────────────────────────── -->
+  <section id="publications" class="section">
+    <h1>Publications</h1>
+    <!-- <div class="section-subtitle">Peer-reviewed articles &amp; preprints</div> -->
+
+    <div class="pub-year-group">
+      <div class="pub-year">2025</div>
+
+      <div class="pub-item">
+        <div class="pub-rule"></div>
+        <div class="pub-content">
+          <div class="pub-title">Examining the Fidelity of Leith Subgrid Closures for Parameterizing Mesoscale Eddies in Idealized and Global (NEMO) Ocean Models</div>
+          <div class="pub-authors"><em>Wilder, T.</em>, Kuhlbrodt, T.</div>
+          <div class="pub-journal">Journal of Advances in Modeling Earth Systems</div>
+          <div class="pub-links">
+            <a class="pub-link" href="https://doi.org/10.1029/2025MS004950">DOI</a>
+            <a class="pub-link" href="paper/WilderKuhlbrodt-2025.pdf">PDF</a>
+            <a class="pub-link" href="https://doi.org/10.5281/zenodo.15703784">Code</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="pub-item">
+        <div class="pub-rule"></div>
+        <div class="pub-content">
+          <div class="pub-title">
+            <a href="#">Eddy diffusivity parameterisations in coarse-resolution ocean models: a hybrid approach</a>
+          </div>
+          <div class="pub-authors"><em>Wilder, T.</em>, Davies, P.</div>
+          <div class="pub-journal">Journal of Advances in Modeling Earth Systems, 16(2)</div>
+          <div class="pub-links">
+            <a class="pub-link" href="#">DOI</a>
+            <a class="pub-link" href="#">PDF</a>
+            <a class="pub-link" href="#">Preprint</a>
+          </div>
+        </div>
+      </div> -->
+    </div>
+
+    <div class="pub-year-group">
+      <div class="pub-year">2024</div>
+
+      <div class="pub-item">
+        <div class="pub-rule"></div>
+        <div class="pub-content">
+          <div class="pub-title">A Glimpse into the Future: The 2023 Ocean Temperature and Sea Ice Extremes in the Context of Longer-Term Climate Change</div>
+          <div class="pub-authors">Kuhlbrodt, T., Swaminathan, R., Ceppi, P., <em>Wilder, T.</em></div>
+          <div class="pub-journal">Bulletin of the American Meteorological Society</div>
+          <div class="pub-links">
+            <a class="pub-link" href="https://doi.org/10.1175/BAMS-D-23-0209.1">DOI</a>
+            <a class="pub-link" href="paper/Kuhlbrodt-2024.pdf">PDF</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pub-year-group">
+      <div class="pub-year">2023</div>
+
+      <div class="pub-item">
+        <div class="pub-rule"></div>
+        <div class="pub-content">
+          <div class="pub-title">Constraining an eddy energy dissipation rate due to relative wind stress for use in energy budget-based eddy parameterisations</div>
+          <div class="pub-authors"><em>Wilder, T.</em>, Zhai, X., Munday, D., Joshi, M.</div>
+          <div class="pub-journal">Ocean Science</div>
+          <div class="pub-links">
+            <a class="pub-link" href="https://doi.org/10.5194/os-19-1669-2023">DOI</a>
+            <a class="pub-link" href="paper/Wilder2023.pdf">PDF</a>
+            <a class="pub-link" href="https://doi.org/10.5281/zenodo.8341660">Code</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pub-year-group">
+      <div class="pub-year">2022</div>
+
+      <div class="pub-item">
+        <div class="pub-rule"></div>
+        <div class="pub-content">
+          <div class="pub-title">The Response of a Baroclinic Anticyclonic Eddy to Relative Wind Stress Forcing</div>
+          <div class="pub-authors"><em>Wilder, T.</em>, Zhai, X., Munday, D., Joshi, M.</div>
+          <div class="pub-journal">Journal of Physical Oceanography</div>
+          <div class="pub-links">
+            <a class="pub-link" href="https://doi.org/10.1175/JPO-D-22-0044.1">DOI</a>
+            <a class="pub-link" href="paper/Wilder2022.pdf">PDF</a>
+            <a class="pub-link" href="https://github.com/thomaswilder/jpo_eddy-scripts">Code</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CV ───────────────────────────────────────────────────── -->
+  <section id="cv" class="section">
+    <h1>Curriculum Vitae</h1>
+    <!-- <div class="section-subtitle">Full CV available as PDF</div> -->
+
+    <a class="cv-download" href="cv.pdf" download>
+      ↓ &nbsp;Download CV (PDF)
+    </a>
+
+    <div class="cv-section-head">Positions</div>
+
+    <div class="cv-entry">
+      <div class="cv-dates">2022 – present</div>
+      <div class="cv-body">
+        <div class="cv-role">Research Scientist</div>
+        <div class="cv-inst">University of Reading, Department of Meteorology</div>
+        <div class="cv-desc">Ocean mixing, eddy parameterisations, and machine learning in oceanography.</div>
+      </div>
+    </div>
+
+    <div class="cv-section-head">Education</div>
+
+    <div class="cv-entry">
+      <div class="cv-dates">2018 – 2022</div>
+      <div class="cv-body">
+        <div class="cv-role">PhD Physical Oceanography</div>
+        <div class="cv-inst">University of East Anglia</div>
+        <div class="cv-desc">Thesis: Mesoscale Eddy-Wind Interaction.</div>
+      </div>
+    </div>
+
+    <div class="cv-entry">
+      <div class="cv-dates">2016 – 2017</div>
+      <div class="cv-body">
+        <div class="cv-role">MSc Applied Mathematics</div>
+        <div class="cv-inst">University of Manchester</div>
+      </div>
+    </div>
+
+    <div class="cv-section-head">Skills &amp; tools</div>
+
+    <div class="cv-entry">
+      <div class="cv-dates">Computing</div>
+      <div class="cv-body">
+        <div class="cv-desc">Python (xarray, Tensorflow/Keras, matplotlib), Bash, HPC (JASMIN, ARCHER2)</div>
+      </div>
+    </div>
+
+    <div class="cv-entry">
+      <div class="cv-dates">Models</div>
+      <div class="cv-body">
+        <div class="cv-desc">NEMO, MITgcm</div>
+      </div>
+    </div>
+
+    <!-- <div class="cv-section-head">Selected grants &amp; awards</div>
+
+    <div class="cv-entry">
+      <div class="cv-dates">2023</div>
+      <div class="cv-body">
+        <div class="cv-role">NERC Standard Grant</div>
+        <div class="cv-inst">Co-investigator — £···k</div>
+      </div>
+    </div> -->
+
+  </section>
+
+</main>
+
+<script>
+  // Simple single-page navigation
+  const links = document.querySelectorAll('.nav-link');
+  const sections = document.querySelectorAll('.section');
+
+  function showSection(id) {
+    sections.forEach(s => s.classList.remove('active'));
+    links.forEach(l => l.classList.remove('active'));
+    const target = document.getElementById(id);
+    if (target) target.classList.add('active');
+    const link = document.querySelector(`[data-section="${id}"]`);
+    if (link) link.classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  links.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      showSection(link.dataset.section);
+      history.pushState(null, '', link.getAttribute('href'));
+    });
+  });
+
+  // Handle direct URL hash on load and back/forward navigation
+  function showFromHash() {
+    showSection(window.location.hash.replace('#', '') || 'about');
+  }
+  window.addEventListener('popstate', showFromHash);
+  if (window.location.hash) showFromHash();
+</script>
+
+</body>
+</html>
